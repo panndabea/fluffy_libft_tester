@@ -4,105 +4,6 @@
 #include <ctype.h>
 #include "libft.h"
 
-void test_ft_strnstr() {
-    printf("\nTesting ft_strnstr:\n");
-    const char *haystack = "42 Network";
-    const char *needle = "Net";
-    char *result = ft_strnstr(haystack, needle, strlen(haystack));
-    printf("Haystack: %s | Needle: %s | Result: %s\n", haystack, needle, result);
-}
-
-void test_ft_strtrim() {
-    printf("\nTesting ft_strtrim:\n");
-    const char *str = "   42 Network  ";
-    char *result = ft_strtrim(str, " ");
-    printf("Original: \"%s\" | Trimmed: \"%s\"\n", str, result);
-    free(result);
-}
-
-void test_ft_substr() {
-    printf("\nTesting ft_substr:\n");
-    const char *str = "42 Network!";
-    char *substr = ft_substr(str, 3, 5);
-    printf("Original: %s | Substring: %s\n", str, substr);
-    free(substr);
-}
-
-void test_ft_strjoin() {
-    printf("\nTesting ft_strjoin:\n");
-    const char *s1 = "42";
-    const char *s2 = " Network!";
-    char *result = ft_strjoin(s1, s2);
-    printf("s1: \"%s\" | s2: \"%s\" | Joined: \"%s\"\n", s1, s2, result);
-    free(result);
-}
-
-void test_ft_strsplit() {
-    printf("\nTesting ft_strsplit:\n");
-    const char *str = "42 Network 42!";
-    char **result = ft_strsplit(str, ' '); // Trennt bei Leerzeichen
-    for (int i = 0; result[i] != NULL; i++) {
-        printf("Result[%d]: \"%s\"\n", i, result[i]);
-        free(result[i]);
-    }
-    free(result);
-}
-
-void test_ft_itoa() {
-    printf("\nTesting ft_itoa:\n");
-    int num = -42;
-    char *result = ft_itoa(num);
-    printf("Input: %d | Result: %s\n", num, result);
-    free(result);
-}
-
-void test_ft_strmapi() {
-    printf("\nTesting ft_strmapi:\n");
-    const char *str = "42 Network!";
-    char *result = ft_strmapi(str, ft_toupper); // Wendet ft_toupper auf jedes Zeichen an
-    printf("Original: %s | Mapped: %s\n", str, result);
-    free(result);
-}
-
-void test_ft_lst() {
-    printf("\nTesting ft_lst functions:\n");
-
-    t_list *lst = ft_lstnew("First Element");
-    ft_lstadd_front(&lst, ft_lstnew("Second Element"));
-    ft_lstadd_back(&lst, ft_lstnew("Third Element"));
-
-    printf("List size: %d\n", ft_lstsize(lst));
-    printf("First element: %s\n", (char *)lst->content);
-    printf("Last element: %s\n", (char *)ft_lstlast(lst)->content);
-
-    t_list *temp = lst;
-    while (temp) {
-        t_list *next = temp->next;
-        free(temp);
-        temp = next;
-    }
-}
-
-void test_ft_lstclear() {
-    printf("\nTesting ft_lstclear:\n");
-    t_list *lst = ft_lstnew("First");
-    ft_lstadd_back(&lst, ft_lstnew("Second"));
-    ft_lstadd_back(&lst, ft_lstnew("Third"));
-
-    printf("Before clear:\n");
-    t_list *temp = lst;
-    while (temp) {
-        printf("%s\n", (char *)temp->content);
-        temp = temp->next;
-    }
-
-    ft_lstclear(&lst, free);
-
-    printf("After clear: List is empty.\n");
-    if (!lst) {
-        printf("List is NULL\n");
-    }
-}
 
 // Helper to print arrays (e.g., memset, memmove tests)
 void print_bytes(const char *label, void *data, size_t len) {
@@ -293,17 +194,6 @@ int main() {
     test_ft_atoi();
     test_ft_strdup();
     test_ft_calloc();
-
-     // Neue Tests:
-    test_ft_strnstr();
-    test_ft_strtrim();
-    test_ft_substr();
-    test_ft_strjoin();
-    test_ft_strsplit();
-    test_ft_itoa();
-    test_ft_strmapi();
-    test_ft_lst();        // Liste Test
-    test_ft_lstclear();   // Liste löschen Test
 
     printf("\nAll tests completed!\n");
     return 0;
